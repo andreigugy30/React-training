@@ -98,6 +98,9 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = "red";
+      style.color = "white";
     }
 
     return (

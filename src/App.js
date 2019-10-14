@@ -67,6 +67,15 @@ class App extends Component {
     });
   };
 
+  deletePersonHandler = personIndex => {
+    //Create a copy of array
+
+    // const persons = this.state.persons.slice()
+    let persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
+  };
+
   render() {
     const style = {
       backgroundColor: "#57f7ff",
@@ -85,8 +94,16 @@ class App extends Component {
     if (this.state.showContent) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person name={person.name} age={person.age} />;
+          {this.state.persons.map((person, index) => {
+            console.log(index);
+            return (
+              <Person
+                key={index}
+                name={person.name}
+                age={person.age}
+                click={() => this.deletePersonHandler(index)}
+              />
+            );
           })}
         </div>
       );

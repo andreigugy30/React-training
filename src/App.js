@@ -80,31 +80,37 @@ class App extends Component {
       fontWeight: "600"
     };
 
+    let persons = null;
+
+    if (this.state.showContent) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            change={this.changeTextInput}
+          >
+            My hobbies are:{" "}
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>My react app!</h1>
         <button style={style} onClick={this.toggleContent}>
           Switch name
         </button>
-        {this.state.showContent ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              change={this.changeTextInput}
-            >
-              My hobbies are:{" "}
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-            />
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
   }

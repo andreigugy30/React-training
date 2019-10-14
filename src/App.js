@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.module.css";
 import Person from "./Person/Person";
 import Radium from "radium";
 
@@ -117,14 +117,14 @@ class App extends Component {
     const titleStyles = [];
 
     if (this.state.persons.length <= 2) {
-      titleStyles.push("red");
+      titleStyles.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      titleStyles.push("bold");
+      titleStyles.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>My react app!</h1>
         <p className={titleStyles.join(" ")}>It is working</p>
         <button style={style} onClick={this.toggleContent}>

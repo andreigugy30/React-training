@@ -103,9 +103,19 @@ class App extends Component {
       style.color = "white";
     }
 
+    const titleStyles = [];
+
+    if (this.state.persons.length <= 2) {
+      titleStyles.push("red");
+    }
+    if (this.state.persons.length <= 1) {
+      titleStyles.push("bold");
+    }
+
     return (
       <div className="App">
         <h1>My react app!</h1>
+        <p className={titleStyles.join(" ")}>It is working</p>
         <button style={style} onClick={this.toggleContent}>
           Switch name
         </button>

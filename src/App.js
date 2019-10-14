@@ -5,18 +5,9 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      {
-        name: "Andrei",
-        age: 33
-      },
-      {
-        name: "Alex",
-        age: 32
-      },
-      {
-        name: "Ana",
-        age: 30
-      }
+      { id: 1, name: "Andrei", age: 33 },
+      { id: 2, name: "Alex", age: 32 },
+      { id: 3, name: "Ana", age: 30 }
     ],
     otherState: "some other state",
     showContent: false
@@ -41,22 +32,22 @@ class App extends Component {
     });
   };
 
-  changeTextInput = event => {
+  changeTextInput = (event, id) => {
+    const personIndex = this.state.persons.findIndex(person => {
+      return person.id === id;
+    });
+
+    //Create a copy of an object
+    const person = { ...this.state.persons[personIndex] };
+    // const person = Object.assign({}, this.state.persons[personIndex])
+
+    //Updating the array
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        {
-          name: "Andreieeeee",
-          age: 33
-        },
-        {
-          name: event.target.value,
-          age: 32
-        },
-        {
-          name: "Ana",
-          age: 28
-        }
-      ]
+      persons: persons
     });
   };
 
@@ -68,7 +59,7 @@ class App extends Component {
   };
 
   deletePersonHandler = personIndex => {
-    //Create a copy of array
+    //Create a copy of array with spread operator
 
     // const persons = this.state.persons.slice()
     let persons = [...this.state.persons];
@@ -95,13 +86,13 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            console.log(index);
             return (
               <Person
                 key={index}
                 name={person.name}
                 age={person.age}
                 click={() => this.deletePersonHandler(index)}
+                change={event => this.changeTextInput(event, person.id)}
               />
             );
           })}

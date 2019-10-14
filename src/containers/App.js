@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classes from "./App.module.css";
 import Persons from "../components/Persons/Persons";
+import Info from "../components/Info/Info";
 
 class App extends Component {
   state = {
@@ -72,32 +73,21 @@ class App extends Component {
 
     if (this.state.showContent) {
       persons = (
-        <div>
-          <Persons
-            persons={this.state.persons}
-            clicked={this.deletePersonHandler}
-            changed={this.changeTextInput}
-          />
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.changeTextInput}
+        />
       );
-    }
-
-    const titleStyles = [];
-
-    if (this.state.persons.length <= 2) {
-      titleStyles.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      titleStyles.push(classes.bold);
     }
 
     return (
       <div className={classes.App}>
-        <h1>My react app!</h1>
-        <p className={titleStyles.join(" ")}>It is working</p>
-        <button className={classes.Button} onClick={this.toggleContent}>
-          Switch name
-        </button>
+        <Info
+          showContent={this.state.showContent}
+          persons={this.state.persons}
+          clicked={this.toggleContent}
+        />
         {persons}
       </div>
     );

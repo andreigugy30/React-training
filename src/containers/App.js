@@ -4,6 +4,17 @@ import Persons from "../components/Persons/Persons";
 import Info from "../components/Info/Info";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props, state);
+
+    return state;
+  }
+
   state = {
     persons: [
       { id: 1, name: "Andrei", age: 33 },
@@ -69,6 +80,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("[App.js] render ");
     let persons = null;
 
     if (this.state.showContent) {
